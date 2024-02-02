@@ -30,7 +30,7 @@ class Request:
 
         #------------------------------------------
         RequestLine = bytes.split(b"\r\n\r\n")
-        # another CRLF after message body?
+        # anfdother CRLF after message body?
         MessageBody = RequestLine[1]
         MessageBody += self.body
         # THE METHOD AND THE PORT HAVE SPACES INBETWEEN THE PATH

@@ -12,7 +12,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         print("--- end of data ---\n\n")
         request = Request(received_data)
 
-        # TODO: Parse the HTTP request and use self.request.sendall(response) to send your response
+        # TvdfODO: Parse the HTTP request and use self.request.sendall(response) to send your response
 
 
 def main():
