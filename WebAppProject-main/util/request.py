@@ -31,34 +31,37 @@ class Request:
         #------------------------------------------
         RequestLine = bytes.split(b"\r\n\r\n")
         # anfdother CRLF after message body?
-        MessageBody = RequestLine[1]
-        MessageBody += self.body
+        if len(RequestLine) > 1:
+            MessageBody = RequestLine[1]
+            MessageBody += self.body
+        else:
         # THE METHOD AND THE PORT HAVE SPACES INBETWEEN THE PATH
-        HTTPMethnPathPortHeader = RequestLine[0].decode()
-        Headerlines = HTTPMethnPathPortHeader.split("\r\n")
-        HTTPMETHpathjnPort = Headerlines[0]
-        Headerparts = Headerlines[1]
-        Parts = Headerparts[1].split(":")
-        DictHeader = self.headers
+            MethnPathPortnHeader = RequestLine[0]
+            HTTPMethnPathPortHeader = MethnPathPortnHeader[0].decode()
+            Headerlines = HTTPMethnPathPortHeader.split("\r\n")
+            HTTPMETHpathjnPort = Headerlines[0]
+            Headerparts = Headerlines[1]
+            Parts = Headerparts[1].split(":")
+            DictHeader = self.headers
         # logic for space/omit - " Content-Length: 5"
-        DictHeader["Parts[0]"] = ["Parts[1]"]
-        HTTPMeth = HTTPMETHpathjnPort.split(" ",3)
-        Method = HTTPMeth[0]
-        Method += self.method
-        # what if path consist of query_strings(&) or mutiple cookies (=) ?  (loop through)- ask still
-        pathNcookie = HTTPMeth[1]
-        #Cookies = pathNcookie.split(" ")
-        #is there something between the cookies and path?
-        ThePath = self.method
-        pathNcookie += ThePath
-        # do you parse the path with or without the cookies?
-        FindingCookies = pathNcookie.split("=")
-        TheCookiesyay = FindingCookies[1]
-        Cook = self.cookies
-        TheCookiesyay += Cook
-        Portnum = HTTPMeth[3]
-        Port = self.method
-        Portnum += Port
+            DictHeader["Parts[0]"] = ["Parts[1]"]
+            HTTPMeth = HTTPMETHpathjnPort.split(" ",3)
+            Method = HTTPMeth[0]
+            Method += self.method
+            # what if path consist of query_strings(&) or mutiple cookies (=) ?  (loop through)- ask still
+            pathNcookie = HTTPMeth[1]
+            #Cookies = pathNcookie.split(" ")
+            #is there something between the cookies and path?
+            ThePath = self.method
+            pathNcookie += ThePath
+            # do you parse the path with or without the cookies?
+            FindingCookies = pathNcookie.split("=")
+            TheCookiesyay = FindingCookies[1]
+            Cook = self.cookies
+            TheCookiesyay += Cook
+            Portnum = HTTPMeth[3]
+            Port = self.method
+            Portnum += Port
 
 
 
