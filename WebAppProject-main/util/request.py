@@ -63,7 +63,39 @@ class Request:
             Port = self.method
             Portnum += Port
 
+    def ReadingFiles(self):
+       # Files In Public/ ... (more path )
+        with open(b'"style.css,style.css"'):
+            ByteArrCSS = style.css.len()
+            #CSS Request- /path/public/style.css
+    #print( # self.request.sendall("POST /path/public/style.css HTTP/1.1 \r\nContent-Length: ____byte arr \r\nX-Content-Type-Options:
+    #Content-Type: text/css
+    # nosniff ; charset=utf-8"r\n\r\n")
 
+    #HTML request-/ root host
+    with open(b'"index.html, index,html"'):
+             ByteArrHTML = index.html.len()
+
+#print (
+        #self.request.sendall("POST / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r\n")
+
+
+# Content-Type: text/html
+# image requests (cat, dog, eagel, elphant, elphant small, flamigo, kitten
+
+# Image Request- path different - len() bytes
+#Content-Type: image/jpg (?)
+
+#print (
+#self.request.sendall("POST /public/image/cat.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; (no need)  charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/kitten.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/dog.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/eagle.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/flamingo.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+
+#Emoji Request - whats the path? - len()  bytes
+#self.request.sendall("POST  HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 
 
 
