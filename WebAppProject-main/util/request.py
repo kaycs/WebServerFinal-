@@ -48,7 +48,7 @@ class Request:
             HTTPMeth = HTTPMETHpathjnPort.split(" ",3)
             Method = HTTPMeth[0]
             Method += self.method
-            # what if path consist of query_strings(&) or mutiple cookies (=) ?  (loop through)- ask still
+            # Q: what if my path consist of query_strings(&) or multiple cookies (=) ?  (loop through)- ask still
             pathNcookie = HTTPMeth[1]
             #Cookies = pathNcookie.split(" ")
             #is there something between the cookies and path?
@@ -63,6 +63,8 @@ class Request:
             Port = self.method
             Portnum += Port
 
+# Q: Does this code go into my server - POST request for html/img? (Extending MYTCPHANDLER)
+    # nosniff ; charset=utf-8"r\n\r\n")
     def ReadingFiles(self):
        # Files In Public/ ... (more path )
         with open(b'"style.css,style.css"'):
@@ -70,9 +72,10 @@ class Request:
             #CSS Request- /path/public/style.css
     #print( # self.request.sendall("POST /path/public/style.css HTTP/1.1 \r\nContent-Length: ____byte arr \r\nX-Content-Type-Options:
     #Content-Type: text/css
-    # nosniff ; charset=utf-8"r\n\r\n")
+
 
     #HTML request-/ root host
+    # Q: Can I Convert to Bytes while opening?
     with open(b'"index.html, index,html"'):
              ByteArrHTML = index.html.len()
 
@@ -80,8 +83,7 @@ class Request:
         #self.request.sendall("POST / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r\n")
 
 
-# Content-Type: text/html
-# image requests (cat, dog, eagel, elphant, elphant small, flamigo, kitten
+# Content-Type: text/html- (cat, dog, eagel, elphant, elphant small, flamigo, kitten)
 
 # Image Request- path different - len() bytes
 #Content-Type: image/jpg (?)
@@ -94,7 +96,7 @@ class Request:
 #self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 #self.request.sendall("POST /public/image/flamingo.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 
-#Emoji Request - whats the path? - len()  bytes
+#Q: For emoji request what is  the path? -  bytes array
 #self.request.sendall("POST  HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 
 

@@ -1,5 +1,5 @@
-
-/TCP Sokcet Server
+/ Can someone help me utlize the Node.JS extension?
+/TCP Sokcet Server- NODE.JS VERSION
     const net = required(‘net’);
     console.log(“starting the server”);
 
@@ -10,7 +10,7 @@
 
     socket.on( “data”, (function(data) {
 
-        const clientId = socket.remoteAdress + “:”+ socket.remotePort;
+        const clientId = socket.remoteAdress + ":”+ socket.remotePort;
     /printing length of data
 
         console.log('“\n\n*******\n\nfrom” + clientId + “received” + data.length + “bytes”');
