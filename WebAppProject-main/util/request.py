@@ -29,7 +29,7 @@ class Request:
 
 
         #------------------------------------------
-        RequestLine = bytes.split(b"\r\n\r\n")
+        RequestLine = request.split(b"\r\n\r\n")
         # anfdother CRLF after message body?
         if len(RequestLine) > 1:
             MessageBody = RequestLine[1]
@@ -44,8 +44,8 @@ class Request:
             Parts = Headerparts[1].split(":")
             DictHeader = self.headers
         # logic for space/omit - " Content-Length: 5"
-            DictHeader["Parts[0]"] = ["Parts[1]"]
-            HTTPMeth = HTTPMETHpathjnPort.split(" ",3)
+            DictHeader[Parts[0]] = [Parts[1]]
+            HTTPMeth = HTTPMETHpathjnPort.split()
             Method = HTTPMeth[0]
             Method += self.method
             # Q: what if my path consist of query_strings(&) or multiple cookies (=) ?  (loop through)- ask still
@@ -55,6 +55,8 @@ class Request:
             ThePath = self.method
             pathNcookie += ThePath
             # do you parse the path with or without the cookies?
+        #split on ; then = (through each value) - add to cookies dict
+        # go by index pair and spilt pairs
             FindingCookies = pathNcookie.split("=")
             TheCookiesyay = FindingCookies[1]
             Cook = self.cookies
@@ -67,7 +69,7 @@ class Request:
     # nosniff ; charset=utf-8"r\n\r\n")
     def ReadingFiles(self):
        # Files In Public/ ... (more path )
-        with open(b'"style.css,style.css"'):
+        with open("style.css,style.css", "rb"):
             ByteArrCSS = style.css.len()
             #CSS Request- /path/public/style.css
     #print( # self.request.sendall("POST /path/public/style.css HTTP/1.1 \r\nContent-Length: ____byte arr \r\nX-Content-Type-Options:

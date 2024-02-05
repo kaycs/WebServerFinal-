@@ -24,15 +24,20 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         print("--- end of data ---\n\n")
         request = Request(received_data)
     #.decode() - string .encode() - bytes
+# CONCATENATE THE RECIEVED DAT YOU GOT - RESPONSE FORMAT
 
+#FIRST PART (STRING) - BODY (BYTE) - CONTENT LENGTH IN BYTES
+
+# STRING - BYTES
 # request.sendall - response to client
 # LO2 Responses - IMG/HTML/PNG,ETC
 
     print("\n\n")
 self.request.sendall("HTTP/1.1 Not Found\r\nContent-Length:36\r\nContent-Type text/css; charset=utf-8 \r\n\r\n"
-                     "The requested content does not exist".decode())
+                     "The requested content does not exist".encode())
 
-
+# When data received and processed by request - check path and send app repsone based on path
+# condtional to know what resposne you want - if your path is .... (Threading)
 
 
 
