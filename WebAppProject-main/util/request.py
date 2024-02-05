@@ -31,28 +31,27 @@ class Request:
         #------------------------------------------
         RequestLine = request.split(b"\r\n\r\n")
         # anfdother CRLF after message body?
-        if len(RequestLine) > 1:
-            MessageBody = RequestLine[1]
-            MessageBody += self.body
-        else:
+        MessageBody = RequestLine[1]
+        MessageBody += self.body
         # THE METHOD AND THE PORT HAVE SPACES INBETWEEN THE PATH
-            MethnPathPortnHeader = RequestLine[0]
-            HTTPMethnPathPortHeader = MethnPathPortnHeader[0].decode()
-            Headerlines = HTTPMethnPathPortHeader.split("\r\n")
-            HTTPMETHpathjnPort = Headerlines[0]
-            Headerparts = Headerlines[1]
-            Parts = Headerparts[1].split(":")
-            DictHeader = self.headers
+        MethnPathPortnHeader = RequestLine[0]
+        HTTPMethnPathPortHeader = MethnPathPortnHeader[0].decode()
+        Headerlines = HTTPMethnPathPortHeader.split("\r\n")
+        HTTPMETHpathjnPort = Headerlines[0]
+        Headerparts = Headerlines[1]
+        Parts = Headerparts[1].split(":")
+        DictHeader = self.headers
         # logic for space/omit - " Content-Length: 5"
-            DictHeader[Parts[0]] = [Parts[1]]
-            HTTPMeth = HTTPMETHpathjnPort.split()
-            Method = HTTPMeth[0]
-            Method += self.method
-            # Q: what if my path consist of query_strings(&) or multiple cookies (=) ?  (loop through)- ask still
-            pathNcookie = HTTPMeth[1]
-            #Cookies = pathNcookie.split(" ")
+        DictHeader[Parts[0]] = [Parts[1]]
+        HTTPMeth = HTTPMETHpathjnPort.split(" ",2)
+        Method = HTTPMeth[0]
+        Method += self.method
+        # Q: what if my path consist of query_strings(&) or multiple cookies (=) ?  (loop through)- ask still
+        # FIXXXXXXXXXXXXX
+        pathNcookie = HTTPMeth[1]
+        Cookies = pathNcookie.split(";")
             #is there something between the cookies and path?
-            ThePath = self.method
+        ThePath = self.method
             pathNcookie += ThePath
             # do you parse the path with or without the cookies?
         #split on ; then = (through each value) - add to cookies dict
