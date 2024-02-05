@@ -52,7 +52,7 @@ class Request:
         Cookies = pathNcookie.split(";")
             #is there something between the cookies and path?
         ThePath = self.method
-            pathNcookie += ThePath
+        pathNcookie += ThePath
             # do you parse the path with or without the cookies?
         #split on ; then = (through each value) - add to cookies dict
         # go by index pair and spilt pairs
