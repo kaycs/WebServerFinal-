@@ -49,56 +49,23 @@ class Request:
         # Q: what if my path consist of query_strings(&) or multiple cookies (=) ?  (loop through)- ask still
         # FIXXXXXXXXXXXXX
         pathNcookie = HTTPMeth[1]
+        # get the path apart -
+        pathNcookie.split()
+        PaTH = pathNcookie[0]
+        ThePath = self.method
+        Path += ThePath
+        #then split on the cookies
         Cookies = pathNcookie.split(";")
             #is there something between the cookies and path?
-        ThePath = self.method
-        pathNcookie += ThePath
+        CookieK = Cookies.split("=")
+        Cook = self.cookies
+        Cook[CookieK[0]] = Cook[CookieK[1]]
             # do you parse the path with or without the cookies?
         #split on ; then = (through each value) - add to cookies dict
-        # go by index pair and spilt pairs
-            FindingCookies = pathNcookie.split("=")
-            TheCookiesyay = FindingCookies[1]
-            Cook = self.cookies
-            TheCookiesyay += Cook
-            Portnum = HTTPMeth[3]
-            Port = self.method
-            Portnum += Port
+        Portnum = HTTPMeth[3]
+        Port = self.method
+        Portnum += Port
 
-# Q: Does this code go into my server - POST request for html/img? (Extending MYTCPHANDLER)
-    # nosniff ; charset=utf-8"r\n\r\n")
-    def ReadingFiles(self):
-       # Files In Public/ ... (more path )
-        with open("style.css,style.css", "rb"):
-            ByteArrCSS = style.css.len()
-            #CSS Request- /path/public/style.css
-    #print( # self.request.sendall("POST /path/public/style.css HTTP/1.1 \r\nContent-Length: ____byte arr \r\nX-Content-Type-Options:
-    #Content-Type: text/css
-
-
-    #HTML request-/ root host
-    # Q: Can I Convert to Bytes while opening?
-    with open(b'"index.html, index,html"'):
-             ByteArrHTML = index.html.len()
-
-#print (
-        #self.request.sendall("POST / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r\n")
-
-
-# Content-Type: text/html- (cat, dog, eagel, elphant, elphant small, flamigo, kitten)
-
-# Image Request- path different - len() bytes
-#Content-Type: image/jpg (?)
-
-#print (
-#self.request.sendall("POST /public/image/cat.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; (no need)  charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/kitten.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/dog.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/eagle.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/flamingo.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-
-#Q: For emoji request what is  the path? -  bytes array
-#self.request.sendall("POST  HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 
 
 
