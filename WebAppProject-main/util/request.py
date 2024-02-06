@@ -27,10 +27,16 @@ class Request:
 
 
         #------------------------------------------
-        RequestLine = request.split(b"\r\n\r\n")
+        RequestLine = request.split(b"\r\n\r\n",1)
         MessageBody = RequestLine[1]
         MessageBody += self.body
         # THE METHOD AND THE PORT HAVE SPACES INBETWEEN THE PATH
+
+        #Head = RequestLine.split(b'"\r\n")
+       # For line in Head.split(b'"\r\n"):
+
+
+
         MethnPathPortnHeader = RequestLine[0]
         HTTPMethnPathPortHeader = MethnPathPortnHeader.decode()
         #HTTPMethnPathPortHeader = MethnPathPortnHeader[0].decode()
