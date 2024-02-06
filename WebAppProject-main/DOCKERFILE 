@@ -2,8 +2,29 @@
 From unbuntu
 18.04
 
-RUN aot-get update
+RUN apt-get update
 
 
+    ENV HOME
+
+   WORKDIR
+
+
+
+
+RUN apt-get update –fix-missing
+RUN apt-get install y- nodejs
+RUN apt-get install-y npm
+
+
+
+
+
+COPY
+
+
+
+# dependices
+RUN request.py  install request.py
 
 
