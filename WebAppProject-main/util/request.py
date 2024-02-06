@@ -53,7 +53,9 @@ class Request:
             Path = pathNcookie[1]
             ThePath = self.method
             Path += ThePath
+            # FIX PARSING THE COOKIES(!!!!)
             #then split on the cookies
+
             Cookies = pathNcookie.split(";")
             #is there something between the cookies and path?
             CookieK = Cookies.split("=")
