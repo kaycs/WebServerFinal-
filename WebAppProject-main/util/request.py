@@ -41,24 +41,26 @@ class Request:
         # Host: localhost:8080    \r\n [1]
         # Connection: keep-alive [2]
         Head = RequestLine[0].split(b'"\r\n"')
-        LHnP = Head[1].decode()
-        Headers = Head[2].decode()
-        Cookie = Head[3].decode()
+        Headd = Head.decode()
+        HeadersDict = self.headers
+        for LHnP in Headd[1].split(":"):
+            HeadersDict[LHnP[0]] = HeadersDict[LHnP[1]]
+            Headers = Headd[2].decode()
+            Cookie = Headd[3].decode()
     #request = b'GET [0]    /[1]    HTTP/1.1[2]     \r\n
-        for Line in Head[0].split(" ",2):
-            Meth = Line[0].decode()
-            Path = Line[1].decode()
-            HTTP = Line[2].decode()
-            Meth += self.method
-            Path += self.path
-            HTTP += self.http_version
-            LHnP =
-            for Headerspart in Headers.split(":"):
-                HeadersDict = self.headers
-                HeadersDict[Headerspart[0]] = HeadersDict[Headerspart[1]]
-            for CookiePairs in Cookie.split(";"):
-                for CookieKey in CookiePairs.split("="):
-                    HeadersDict[CookieKey[0]] = HeadersDict[CookieKey[1]]
+            for Line in Head[0].split(" ",2):
+                Meth = Line[0].decode()
+                Path = Line[1].decode()
+                HTTP = Line[2].decode()
+                Meth += self.method
+                Path += self.path
+                HTTP += self.http_version
+                for Headerspart in Headers.split(":"):
+                    HeadersDict = self.headers
+                    HeadersDict[Headerspart[0]] = HeadersDict[Headerspart[1]]
+                    for CookiePairs in Cookie.split(";"):
+                        for CookieKey in CookiePairs.split("="):
+                            HeadersDict[CookieKey[0]] = HeadersDict[CookieKey[1]]
 
 
 
