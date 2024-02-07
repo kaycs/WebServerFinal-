@@ -40,18 +40,20 @@ class Request:
         #request = b'GET / HTTP/1.1   \r\n [0]
         # Host: localhost:8080    \r\n [1]
         # Connection: keep-alive [2]
+    #CRLF = "\r\n"
+        #for CRLF in RequestLine[0]:
         Head = RequestLine[0].split(b'"\r\n"')
-        Headd = Head.decode()
+        Headd = Head.encode()
         HeadersDict = self.headers
         for LHnP in Headd[1].split(":"):
             HeadersDict[LHnP[0]] = HeadersDict[LHnP[1]]
-            Headers = Headd[2].decode()
-            Cookie = Headd[3].decode()
+            Headers = Headd[2].encode()
+            Cookie = Headd[3].encode()
     #request = b'GET [0]    /[1]    HTTP/1.1[2]     \r\n
-            for Line in Head[0].split(" ",2):
-                Meth = Line[0].decode()
-                Path = Line[1].decode()
-                HTTP = Line[2].decode()
+            for Line in Headd[0].split(" ",2):
+                Meth = Line[0].encode()
+                Path = Line[1].encdoe()
+                HTTP = Line[2].encode()
                 Meth += self.method
                 Path += self.path
                 HTTP += self.http_version
@@ -118,6 +120,20 @@ def test1():
     # It's recommended that you complete this test and add others, including at least one
     # test using a POST request. Also, ensure that the types of all values are correct
 
+# def test2():
+#     request = Request(b'GET /static_file/slides/ HTTP/1.1'\r\nHost: cse312.com\r\nContent-Type: text/plain/r/nContent-Length: 5/r/nConnection: keep-alive/r/n/r/n' b'"hello")
+#     assert request.method == "GET"
+#     assert "Host" in request.headers
+#     assert request.headers["Host"] == "cse312.com"
+#     assert request.body == b"Hello"
 
+
+
+    # def test3():
+    #     request = Request(b'PUT / HTTP/1.1'\r\nHost: cse312.com\r\nContent-Type: text/plain/r/nContent-Length: 5/r/nConnection: keep-alive/r/n/r/n' b'"hello")
+    # assert request.method == "PUT"
+    # assert "Host" in request.headers
+    # assert request.headers["Host"] == "cse312.com"
+    # assert request.body == b"Hello"
 if __name__ == '__main__':
     test1()
