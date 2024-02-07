@@ -5,9 +5,9 @@ From unbuntu
 RUN apt-get update
 
 
-    ENV HOME
+    ENV  HOME /
 
-   WORKDIR
+   WORKDIR /
 
 
 
