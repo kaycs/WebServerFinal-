@@ -1,5 +1,5 @@
 import socketserver
-import Router
+from Router import respond
 # LO2 Goal -
 
 # router.function name - to retrurn to server.py
@@ -29,7 +29,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 # HTTP Method + Number Type Message CRLD Content-Length + CRLF + Content-Type + 2X CRFL
 #and message
 
-        Router(request, self)
+        Router(respond, self)
 
 
 

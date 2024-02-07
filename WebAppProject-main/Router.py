@@ -1,18 +1,13 @@
-import Request (need to access path,method,httpversion,etc )
-Class Router(Request, self):
-
-def request(self):
+import Request
+def respond(self):
  # PARSING INDEX HTML FILE
- if path == /
- self.request.sendall("POST 200 OK... / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
- \
- \
- \
-         # responding to images
-    if (path == "/public/image/kitten" or if Cotent-Type == "image/png" ):
+ if self.path == "/":
+    self.request.sendall("POST 200 OK... / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8; Content-Type: text/html; \r\n\r\n")
+         # responding to images -or if Cotent-Type == "image/png"
+    if (self.path == "/public/image/kitten"):
      Image = b''
         self.request.sendall("POST /public/image/kitten.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
- \
+
 # follow logic for other picture
 
 

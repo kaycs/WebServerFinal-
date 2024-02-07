@@ -30,39 +30,73 @@ class Request:
         #    \r\n\r\n')
 
 
-        #------------------------------------------
-        #request = b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nConnection: keep-alive\r\n\r\n'[0]
+        # ------------------------------------------
+        # request = b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nConnection: keep-alive\r\n\r\n'[0]
         # hello[1]
         RequestLine = request.split(b"\r\n\r\n",1)
         MessageBody = RequestLine[1]
         MessageBody += self.body
         # THE METHOD AND THE PORT HAVE SPACES INBETWEEN THE PATH
-        #request = b'GET / HTTP/1.1   \r\n [0]
+        # request = b'GET / HTTP/1.1   \r\n [0]
         # Host: localhost:8080    \r\n [1]
         # Connection: keep-alive [2]
-    #CRLF = "\r\n"
-        #for CRLF in RequestLine[0]:
-        Head = RequestLine[0].split(b'"\r\n"')
-        Headd = Head.encode()
+    # CRLF = "\r\n"
+        # for CRLF in RequestLine[0]:
+        Head = RequestLine[0].decode().split("\r\n")
         HeadersDict = self.headers
-        for LHnP in Headd[1].split(":"):
-            HeadersDict[LHnP[0]] = HeadersDict[LHnP[1]]
-            Headers = Headd[2].encode()
-            Cookie = Headd[3].encode()
-    #request = b'GET [0]    /[1]    HTTP/1.1[2]     \r\n
-            for Line in Headd[0].split(" ",2):
-                Meth = Line[0].encode()
-                Path = Line[1].encdoe()
-                HTTP = Line[2].encode()
-                Meth += self.method
-                Path += self.path
-                HTTP += self.http_version
-                for Headerspart in Headers.split(":"):
-                    HeadersDict = self.headers
-                    HeadersDict[Headerspart[0]] = HeadersDict[Headerspart[1]]
-                    for CookiePairs in Cookie.split(";"):
-                        for CookieKey in CookiePairs.split("="):
-                            HeadersDict[CookieKey[0]] = HeadersDict[CookieKey[1]]
+        for LHnP in range(1, len(Head)):
+            SplitHead = Head[LHnP].split(":", 1)
+            HeadersDict[SplitHead[0]] = SplitHead[1].strip()
+            # Headers = Head[2].decode()
+            # Cookie = Head[3].decode()
+        # print(HeadersDict)
+        FirstLine =  Head[0].split(" ",2)
+        self.method = FirstLine[0]
+        self.path = FirstLine[1]
+        self.http_version = FirstLine[2]
+        # STILL HAVIING MF COOKIES PROBLEMS - sit down and work with a TA
+        if "Cookies" in HeadersDict:
+            print(HeadersDict)
+            CookiesDict = self.cookies
+            CookiesList = HeadersDict["Cookies"]
+            print(CookiesList)
+            CookiesKey = CookiesList.split(":")
+            CookieKeyPairs = CookiesKey[1].split(";").split("=")
+            CookiesDict[CookieKeyPairs[0][0]] = CookiesDict[CookieKeyPairs[0][1]]
+            print(CookieKeyPairs)
+
+
+
+        #print(CookiesKey[0])
+       # print( CookiesKey[1])
+        #     CookePair = CookiesKey[1]
+        #     for CookiesPairs in range(1,len(CookePair)):
+        #        Pairs = CookiesPairs.split(;)
+        #
+        # print(self.cookies)
+
+        # for CookiesHead in range(1, len(CookiesList)):
+        #     CookieParts = CookiesHead.split(":")
+        #     CookiesValue = CookieParts[1]
+        #     CookiesDict[CookieParts[0]] = CookiesValue[1]
+        #     KeyValueCookies = CookiesValue[1].split(";")
+        #     CookiesDict[KeyValueCookies[0]] = CookiesDict[KeyValueCookies[1]]
+        #
+# access cookies head and split ; , =
+    # request = b'GET [0]    /[1]    HTTP/1.1[2]     \r\n
+            # for Line in Headd[0].split(" ",2):
+            #     Meth = Line[0].decode()
+            #     Path = Line[1].decode()
+            #     HTTP = Line[2].decode()
+            #     Meth += self.method
+            #     Path += self.path
+            #     HTTP += self.http_version
+            #     for Headerspart in Headers.split(":"):
+            #         HeadersDict = self.headers
+            #         HeadersDict[Headerspart[0]] = HeadersDict[Headerspart[1]]
+            #         for CookiePairs in Cookie.split(";"):
+            #             for CookieKey in CookiePairs.split("="):
+            #                 HeadersDict[CookieKey[0]] = HeadersDict[CookieKey[1]]
 
 
 
@@ -109,7 +143,9 @@ class Request:
 
 
 def test1():
-    request = Request(b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nConnection: keep-alive\r\n\r\n')
+    request = Request(b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nCookie: id=1\r\nConnection: keep-alive\r\n\r\n')
+    print("Cookies:", request.cookies)
+    print("Headers:", request.headers)
     assert request.method == "GET"
     assert "Host" in request.headers
     assert request.headers["Host"] == "localhost:8080"  # note: The leading space in the header value must be removed
