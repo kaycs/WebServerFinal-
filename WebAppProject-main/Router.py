@@ -1,75 +1,67 @@
-import Request
+#import Request
 def respond(self):
  # PARSING INDEX HTML FILE
+ # TEXT FILES
  if self.path == "/":
-    self.request.sendall("POST 200 OK... / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8; Content-Type: text/html; \r\n\r\n")
-         # responding to images -or if Cotent-Type == "image/png"
-    if (self.path == "/public/image/kitten"):
-     Image = b''
-        self.request.sendall("POST /public/image/kitten.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+     # b' ?
+     with open("index.html", "r") as html:
+         html = html.read()
+         bytehtml = html.len()
+     # how exaclty to I put that numerical value into the request?
+    self.request.sendall("HTTP/1.1 200 OK\r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; Content-Type: text/html; charset=utf-8 \r\n\r\n")
 
+
+# Path = self.path
+if Path == "/webrtc.js/":
+    self.request.sendall("HTTP/1.1 200 OK /webrtc.js/\r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; Content-Type: text/javascript; charset=utf-8 \r\n\r\n")
+
+
+
+       # Images
+
+         # responding to images -or if Cotent-Type == "image/png"
+ if self.path == "/public/image/kitten.jpg":
+      # with open("cat.png") as Cat:
+      #   Cat =
+            self.request.sendall("HTTP/1.1 200 OK /public/image/kitten.jpg\r\nContent-Length:  \r\nX-Content-Type-Options: nosniff; Content-Type: img/jpg\r\n\r\n")
+ if self.path == "/public/image/eagel.jpg":
+    with open("eagle.jpg") as Eagle:
+     self.request.sendall("HTTP/1.1 200 OK /public/image/eagle.jpg\r\nContent-Length:  \r\nX-Content-Type-Options: nosniff; Content-Type: img/jpg\r\n\r\n")
 # follow logic for other picture
 
+#self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ;Content-Type:  charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/dog.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/cat.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; (no need)  charset=utf-8" \r\n\r \
+#self.request.sendall("POST /public/image/flamingo.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+
+         #--------------------------------------------------------------------
+ #check utf-8
+# css file
+with open("style.css,", "rb") as ByteArrCSS:
+    CSS = ByteArrCSS.len()
+        #CSS Request- /path/public/style.css
+    self.request.sendall("HTTP/1.1 200 OK /public/style.css\r\nContent-Length: \r\nX-Content-Type-Options: nosniff; Content-Type: text/css;charset=utf-8 \r\n\r\n")
+    #Content-Type: text/css
+# icon
+#? if path == ""
 
 
-
- \
- \
- \
- \
- \
- \
-            #--------------------------------------------------------------------
-
-
- def ReadingFiles(self):
-# READING IN TEXT FILE
-#    if path ==
-# Files In Public/ ... (more path )
-  with open("style.css,style.css", "rb"):
- ByteArrCSS = style.css.len()
-#         #CSS Request- /path/public/style.css
-#     #print( # self.request.sendall("POST /path/public/style.css HTTP/1.1 \r\nContent-Length: ____byte arr \r\nX-Content-Type-Options:
-#     #Content-Type: text/css
-#
-#
-#     #HTML request-/ root host
-#     # Q: Can I Convert to Bytes while opening?
-# with open(b'"index.html, index,html"'):
-#     ByteArrHTML = index.html.len()
-
-
-
-
-
-# self.request.sendall("HTTP/1.1 Not Found\r\nContent-Length:36\r\nContent-Type text/css; charset=utf-8 \r\n\r\n"
+#404 error
+    # whats the conditional and check 404 in message
+#     self.path = Path
+# if Path == Exception:
+     self.request.sendall("HTTP/1.1 Not Found\r\nContent-Length:36\r\nContent-Type text/css; charset=utf-8 \r\n\r\n")
 #                  "The requested content does not exist".encode())
 
 # When data received and processed by request - check path and send app repsone based on path
 # condtional to know what resposne you want - if your path is .... (Threading)
 
 #-----------------------------------------------------------------------
+#Verify that the HTML (done),(done) CSS, JavaScript, and image were all served through separate HTTP requests
+    # Check each HTTP response for the correct MIME type
+    # Check each HTTP response for the correct Content-Length
+    # Verify that the 2 emoji (non-ASCII characters) display properly
+    # Verify that a UB icon is displayed in the tab for the page
 
-# Q: Does this code go into my server - POST request for html/img? (Extending MYTCPHANDLER)
-# nosniff ; charset=utf-8"r\n\r\n")
 
-#print (
-#self.request.sendall("POST / HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r\n")
-
-
-# Content-Type: text/html- (cat, dog, eagel, elphant, elphant small, flamigo, kitten)
-
-# Image Request- path different - len() bytes
-#Content-Type: image/jpg (?)
-
-#print (
-#self.request.sendall("POST /public/image/cat.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; (no need)  charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/kitten.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/dog.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/eagle.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/flamingo.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
-
-#Q: For emoji request what is  the path? -  bytes array
-#self.request.sendall("POST  HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 

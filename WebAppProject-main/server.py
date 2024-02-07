@@ -29,7 +29,8 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 # HTTP Method + Number Type Message CRLD Content-Length + CRLF + Content-Type + 2X CRFL
 #and message
 
-        Router(respond, self)
+       # Router(respond, self)
+           # return(respond(recevied_data))
 
 
 

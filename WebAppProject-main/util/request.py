@@ -33,6 +33,8 @@ class Request:
         # ------------------------------------------
         # request = b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nConnection: keep-alive\r\n\r\n'[0]
         # hello[1]
+        #def parserequest(self,MessageBody):
+           #self.body = MessageBody
         RequestLine = request.split(b"\r\n\r\n",1)
         MessageBody = RequestLine[1]
         MessageBody += self.body
@@ -61,7 +63,8 @@ class Request:
             CookiesList = HeadersDict["Cookies"]
             print(CookiesList)
             CookiesKey = CookiesList.split(":")
-            CookieKeyPairs = CookiesKey[1].split(";").split("=")
+            for CookieKeyPairs in range(1, len(CookiesKey)):
+                CookieKeyPairs = CookiesKey[1].split(";").split("=")
             CookiesDict[CookieKeyPairs[0][0]] = CookiesDict[CookieKeyPairs[0][1]]
             print(CookieKeyPairs)
 
@@ -149,7 +152,10 @@ def test1():
     assert request.method == "GET"
     assert "Host" in request.headers
     assert request.headers["Host"] == "localhost:8080"  # note: The leading space in the header value must be removed
-    assert request.body == b""  # There is no body for this request.
+    assert request.body == b""
+    assert request.headers["Host"] == "localhost:8080"
+
+# There is no body for this request.
     # When parsing POST requests, the body must be in bytes, not str
 
     # This is the start of a simple way (ie. no external libraries) to test your code.
