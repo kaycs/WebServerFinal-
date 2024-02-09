@@ -4,12 +4,14 @@ def respond(self):
  # TEXT FILES
  if self.path == "/":
      # b' ?
-     with open("index.html", "r") as html:
+     # change HTML bc lib in python
+     with open("index.html", "rb") as html:
          html = html.read()
-         bytehtml = html.len()
+         bytehtml = len(html)
      # how exaclty to I put that numerical value into the request?
-    self.request.sendall("HTTP/1.1 200 OK\r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; Content-Type: text/html; charset=utf-8 \r\n\r\n")
-
+    self.request.sendall(f"HTTP/1.1 200 OK\r\nContent-Length: {bytehtml}\r\nX-Content-Type-Options: nosniff ; Content-Type: text/html; charset=utf-8 \r\n\r\n". encode())
+# f - formatting
+# encode REQUEST LINE (SLAPPING BYTES AT END) uNELSS DATA ALREADY IN BYTES - IMG, VIDEOS
 
 # Path = self.path
 if Path == "/webrtc.js/":
@@ -17,7 +19,7 @@ if Path == "/webrtc.js/":
 
 
 
-       # Images
+       # Images= how do you make it generic -"image/png" then specificy?
 
          # responding to images -or if Cotent-Type == "image/png"
  if self.path == "/public/image/kitten.jpg":
@@ -28,9 +30,10 @@ if Path == "/webrtc.js/":
     with open("eagle.jpg") as Eagle:
      self.request.sendall("HTTP/1.1 200 OK /public/image/eagle.jpg\r\nContent-Length:  \r\nX-Content-Type-Options: nosniff; Content-Type: img/jpg\r\n\r\n")
 # follow logic for other picture
-
-#self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ;Content-Type:  charset=utf-8" \r\n\r \
-#self.request.sendall("POST /public/image/dog.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
+if self.path == "/public/image/elephant-small.png":
+    self.request.sendall("POST /public/image/elephant-small.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ;Content-Type:  charset=utf-8 \r\n\r\n")
+if self.path = /public/image/dog.
+self.request.sendall("POST /public/image/dog.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 #self.request.sendall("POST /public/image/cat.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; (no need)  charset=utf-8" \r\n\r \
 #self.request.sendall("POST /public/image/flamingo.jpg HTTP/1.1 \r\nContent-Length: \r\nX-Content-Type-Options: nosniff ; charset=utf-8" \r\n\r \
 

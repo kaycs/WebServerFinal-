@@ -37,7 +37,7 @@ class Request:
            #self.body = MessageBody
         RequestLine = request.split(b"\r\n\r\n",1)
         MessageBody = RequestLine[1]
-        MessageBody += self.body
+        self.body = MessageBody
         # THE METHOD AND THE PORT HAVE SPACES INBETWEEN THE PATH
         # request = b'GET / HTTP/1.1   \r\n [0]
         # Host: localhost:8080    \r\n [1]
@@ -57,17 +57,22 @@ class Request:
         self.path = FirstLine[1]
         self.http_version = FirstLine[2]
         # STILL HAVIING MF COOKIES PROBLEMS - sit down and work with a TA
-        if "Cookies" in HeadersDict:
+        if "Cookie" in HeadersDict:
             print(HeadersDict)
             CookiesDict = self.cookies
-            CookiesList = HeadersDict["Cookies"]
-            print(CookiesList)
-            CookiesKey = CookiesList.split(":")
-            for CookieKeyPairs in range(1, len(CookiesKey)):
-                CookieKeyPairs = CookiesKey[1].split(";").split("=")
-            CookiesDict[CookieKeyPairs[0][0]] = CookiesDict[CookieKeyPairs[0][1]]
-            print(CookieKeyPairs)
-
+            CookieString = HeadersDict["Cookie"]
+            #print(CookiesList)
+            KeyCookies = CookieString.split(";")
+            for CookieKeyPairs in KeyCookies:
+                CookiesKey = CookieKeyPairs.split("=")
+                CookiesDict[CookiesKey[0].strip()] = CookiesKey[1].strip()
+                # python organizes dict any way - list ab order
+                # MAKE SURE IM NOT SPLITTING TOO MUCH - MAKE SURE SPLITS ARE cORRECT OR NOT TOO MUCH DATA
+# for CookieKeyPairs in range(1, len(CookiesKey)):
+#                 CookieKeyPairs = CookiesKey[1].split(";").split("=")
+#             CookiesDict[CookieKeyPairs[0][0]] = CookiesDict[CookieKeyPairs[0][1]]
+#             print(CookieKeyPairs)
+#
 
 
         #print(CookiesKey[0])
@@ -147,14 +152,42 @@ class Request:
 
 def test1():
     request = Request(b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nCookie: id=1\r\nConnection: keep-alive\r\n\r\n')
-    print("Cookies:", request.cookies)
+    print("Cookie:", request.cookies)
     print("Headers:", request.headers)
     assert request.method == "GET"
     assert "Host" in request.headers
     assert request.headers["Host"] == "localhost:8080"  # note: The leading space in the header value must be removed
     assert request.body == b""
+    assert request.cookies == {"id":"1"}
     assert request.headers["Host"] == "localhost:8080"
 
+# - _ . - JSON ,ETC  - THEN POST REQUEST TOO
+    # PRINT OUT REQUEST AND HEADERS EACH RUN
+def test3():
+    request = Request(b'GET / HTTP/1.1\r\nHost: localhost:8080\r\nCookie: id=1; something=3; another=4\r\nContent-Length: 11\r\nConnection: keep-alive\r\n\r\n{something:5}')
+    print("Cookie:", request.cookies)
+    print("Headers:", request.headers)
+    assert request.method == "GET"
+    assert "Host" in request.headers
+    assert request.headers["Host"] == "localhost:8080"  # note: The leading space in the header value must be removed
+    assert request.body == b"{something:5}"
+    assert request.cookies == {"id":"1", "something":"3","another":"4"}
+    assert request.headers["Host"] == "localhost:8080"
+
+
+
+
+def test5():
+    request = Request(b'POST / HTTP/1.1\r\nHost: localhost:8080\r\nCookie: id=1; something=3; another=4\r\nContent-Length: 4\r\nConnection: keep-alive\r\n\r\nnada')
+    print("Cookie:", request.cookies)
+    print("Headers:", request.headers)
+    assert request.method == "POST"
+    #print(REQUE)
+    assert "Host" in request.headers
+    assert request.headers["Host"] == "localhost:8080"  # note: The leading space in the header value must be removed
+    assert request.body == b"nada"
+    assert request.cookies == {"id":"1", "something":"3","another":"4"}
+    assert request.headers["Host"] == "localhost:8080"
 # There is no body for this request.
     # When parsing POST requests, the body must be in bytes, not str
 
