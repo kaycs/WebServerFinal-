@@ -1,28 +1,30 @@
 # INCLUDE DOCKERFIULE WORK HERE
-From python:3.8
+FROM python:3.8.2
 
-#CD?
+#cding to my home dir always works? - can we talk about how that works
 ENV  HOME / root
 
 WORKDIR /root
 
 COPY . .
 
-# dependices
+# installing dependices
 
-RUN pip3 install -Router.py
 RUN pip3 install -request.py
 RUN pip3 install -server.py
-
+RUN pip3 install -requirement.txt
 
 # all the photos,icons too?
+EXPOSE 0.0.0.0
+
+
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
 
 
 
-EXPOSE 8080
-
-CMD python3 -u
-#(name?)
+CMD /wait  && python3 -u Clone-WebAppProject
+#(name of docker image )
 
 
 

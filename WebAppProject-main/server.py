@@ -1,6 +1,5 @@
 import socketserver
-from Router import respond
-# LO2 Goal -
+# LO2 Goal - respond to various MIME types
 
 # router.function name - to retrurn to server.py
 #ref : http:// docs.python/org/3/library/socketserver.html?hgihlight=requestthan
@@ -32,6 +31,59 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
        # Router(respond, self)
            # return(respond(recevied_data))
 
+
+def respond(self):
+    # PARSING INDEX HTML FILE
+    # TEXT FILES
+    if self.path == "/":
+        # b' ?
+        # change HTML bc lib in python
+        with open("index.html", "rb") as indexh:
+            byt = indexh.read()
+            bytehtml = len(byt)
+        # how exaclty to I put that numerical value into the request?
+            self.request.sendall(f"HTTP/1.1 200 OK\r\nContent-Length: {bytehtml}\r\nX-Content-Type-Options: nosniff ; Content-Type: text/html; charset=utf-8 \r\n\r\n". encode())
+
+    # conditional for path (?)
+        with open("style.css,", "rb") as ByteArrCSS:
+            css = ByteArrCSS.read()
+            cssby = len(css)
+    #CSS Request- /path/public/style.css
+            self.request.sendall(F"HTTP/1.1 200 OK /public/style.css\r\nContent-Length:{cssby} \r\nX-Content-Type-Options: nosniff; Content-Type: text/css;charset=utf-8 \r\n\r\n".encode())
+    #Content-Type: text/css
+    #404 error  (!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+    # whats the conditional and check 404 in message
+    #     self.path = Path
+    #   if self.path == Exception:
+    #     self.request.sendall("HTTP/1.1 Not Found\r\nContent-Length:36\r\nContent-Type text/css; charset=utf-8 \r\n\r\n.encode())")
+    #  #                  "The requested content does not exist".encode())
+    #
+    # # f - formatting
+    # encode REQUEST LINE (SLAPPING BYTES AT END) uNELSS DATA ALREADY IN BYTES - IMG, VIDEOS
+    if self.path == "/public/image/eagel.jpg":
+        with open("eagle.jpg","rb") as Eagle:
+            self.request.sendall(f"HTTP/1.1 200 OK /public/image/eagle.jpg\r\nContent-Length:{Eagle}\r\nX-Content-Type-Options: nosniff; Content-Type: img/jpg\r\n\r\n")
+        # follow logic for other picture
+    # responding to images -or if Cotent-Type == "image/png"
+    elif self.path == "/public/image/kitten.jpg":
+        with open("cat.jpg", "rb" ) as Cat:
+            self.request.sendall(f"HTTP/1.1 200 OK /public/image/kitten.jpg\r\nContent-Length:{Cat}\r\nX-Content-Type-Options: nosniff; Content-Type: img/jpg\r\n\r\n")
+    elif self.path == "/public/image/dog.jpg":
+        with open("dog.jpg","rb") as Dogby:
+            self.request.sendall(f"HTTP 200 OK  /public/image/dog.jpg\r\nContent-Length:{Dogby}\r\nX-Content-Type-Options: nosniff ; Content-Type: img/jpg \r\n\r\n")
+        # follow logic for other picture
+    elif self.path == "/public/image/elephant-small.jpg":
+        with open("elephant-small.png", "rb") as smelepby :
+            self.request.sendall(f"HTTP 200 OK  /public/image/elephant-small.jpg\r\nContent-Length:{smelepby}\r\nX-Content-Type-Options: nosniff ;Content-Type: img/jpg\r\n\r\n")
+    if self.path == "/public/image/eagel.jpg":
+        with open("flamingo.jpg","rb") as flagby:
+            self.request.sendall(f"HTTP 200 OK  /public/image/flamingo.jpg\r\nContent-Length:{flagby}\r\nX-Content-Type-Options: nosniff ; Content-Type: img/jpg \r\n\r\n")
+    # follow logic for other picture
+
+
+
+
+# LO3 - Guest Chat and Database Storage
 
 
 
